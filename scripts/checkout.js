@@ -1,8 +1,8 @@
 import { cart, removeFromCart } from "../data/carts.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
-import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions } from "../data/deliveryOption.js";
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 
 
@@ -25,26 +25,27 @@ cart.forEach((cartItem) => {
   const deliveryOptionId = cartItem.deliveryOptionId;
   console.log(deliveryOptionId);
 
-  let devOption ;
+  let devOption = 0 ;
 
   deliveryOptions.forEach((option) => {
     if(option.id === deliveryOptionId) {
       devOption = option.deliveryDays;
     }
 
-  })
-  console.log(devOption);
+  }) 
     const today = dayjs();
 
     const deliveryDate = today.add(devOption, 'days');
+    
 
     const dateString = deliveryDate.format('dddd ,MMMM D, YYYY')
+    
 
 
     cartSummaryHtml += `
         <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
     <div class="delivery-date">
-      Delivery date: ${dateString}
+      ${today}  Delivery date: ${dateString}
     </div>
 
     <div class="cart-item-details-grid">
