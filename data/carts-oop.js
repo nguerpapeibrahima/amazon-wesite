@@ -1,12 +1,12 @@
-export let carts;
 
-loadFromStorage();
+const carts = {
+  cartItems: undefined,
 
-export function loadFromStorage() {
-  carts = JSON.parse(localStorage.getItem('carts'));
+  loadFromStorage() {
+  this.cartItems = JSON.parse(localStorage.getItem('cart-oop'));
 
-  if (!carts) {
-  carts = [
+  if (!this.cartItems) {
+  this.cartItems = [
     {
         productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         quantity: 2,
@@ -21,19 +21,16 @@ export function loadFromStorage() {
 }
 
 
-}
+},
 
+saveToLocalstorage() {
+  localStorage.setItem('cart-oop', JSON.stringify(this.cartItems));
+},
 
-
-function saveToLocalstorage() {
-  localStorage.setItem('carts', JSON.stringify(carts));
-};
-
-
-export function addToCart(productId) {
+addToCart(productId) {
      let matchingItem;
 
-    carts.forEach((cartItem)=> {
+    this.cartItems.forEach((cartItem)=> {
 
       if(productId === cartItem.productId) {
         matchingItem = cartItem;
@@ -42,32 +39,32 @@ export function addToCart(productId) {
       if(matchingItem) {
         matchingItem.quantity += 1 ;
       } else {
-        carts.push({
+        this.cartItems.push({
       productId: productId,
       quantity:1,
       deliveryOptionId: '1'
     })
       } ;
-   saveToLocalstorage();   
+   this.saveToLocalstorage();   
 
-}
+},
 
-export function removeFromCart(productId) {
+removeFromCart(productId) {
   const newCart = [];
 
-  carts.forEach((cartItem) => {
+  this.cartItems.forEach((cartItem) => {
    if(cartItem.productId !== productId) {
     newCart.push(cartItem);
    }
   });
-  carts = newCart ;
-  saveToLocalstorage();
-}
+  this.cartItems = newCart ;
+  this.saveToLocalstorage();
+},
 
-export function updateDeliveryOption(productId, deliveryOptionId)  {
+updateDeliveryOption(productId, deliveryOptionId)  {
   let matchingItem;
 
-    carts.forEach((cartItem)=> {
+    this.cartItems.forEach((cartItem)=> {
 
       if(productId === cartItem.productId) {
         matchingItem = cartItem;
@@ -75,6 +72,13 @@ export function updateDeliveryOption(productId, deliveryOptionId)  {
       });
 
   matchingItem.deliveryOptionId = deliveryOptionId;
-  saveToLocalstorage();    
+  this.saveToLocalstorage();    
 
 }
+
+
+
+};
+carts.loadFromStorage();
+console.log(carts);
+
