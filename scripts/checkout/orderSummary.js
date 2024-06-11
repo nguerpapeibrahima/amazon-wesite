@@ -28,7 +28,7 @@ carts.forEach((cartItem) => {
 
     const deliveryDate = today.add(devOption.deliveryDays, 'days');
     
-    
+
     
 
     const dateString = deliveryDate.format('dddd ,MMMM D, YYYY')
@@ -142,4 +142,19 @@ document.querySelectorAll('.js-delivery-option').forEach((element) => {
 
 });
 }
+
+
+
+
+function updateCartQuantity() {
+  let cartQuantity = 0;
+      carts.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+
+      });
+   document.querySelector('.js-item').innerHTML = cartQuantity;
+            
+
+}
+updateCartQuantity();
 
