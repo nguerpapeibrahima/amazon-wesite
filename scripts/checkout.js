@@ -5,4 +5,4 @@ import { renderPaymentSammury } from "./checkout/paymentSummary.js";
 
 renderOderSummary();
 renderPaymentSammury();
-// amazonePage();
+// amazonePage()
